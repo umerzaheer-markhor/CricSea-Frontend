@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import {
@@ -168,14 +168,27 @@ function TeamLogoB() {
 
 function MatchCard({ m }: { m: Match }) {
   return (
-    <div className="min-w-[88vw] sm:min-w-[420px] flex-1 rounded-xl bg-surface-secondary border border-border p-4 sm:p-5 hover-lift">
+    <Link
+      to="/match"
+      className="block min-w-[88vw] flex-1 rounded-xl border border-border bg-surface-secondary p-4 transition-colors hover:border-primary/30 hover-lift sm:min-w-[420px] sm:p-5"
+    >
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
         <span className="font-semibold text-text-primary">{m.tournament}</span>
         <div className="flex items-center gap-3 sm:gap-4 text-text-secondary">
           <span>{m.format}</span>
           <span>{m.ball}</span>
           <span className="font-semibold text-danger">{m.status}</span>
-          <button aria-label="More" className="text-text-muted">⋮</button>
+          <button
+            type="button"
+            aria-label="More"
+            className="text-text-muted"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            ⋮
+          </button>
         </div>
       </div>
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-3 rounded-lg bg-surface border border-border p-3 sm:p-4">
@@ -203,7 +216,7 @@ function MatchCard({ m }: { m: Match }) {
       {m.note && (
         <p className="mt-3 text-center text-xs text-text-secondary">{m.note}</p>
       )}
-    </div>
+    </Link>
   );
 }
 
@@ -331,9 +344,10 @@ function Index() {
         </div>
         <div className="flex gap-6 overflow-x-auto overflow-y-visible pt-3 pb-6 no-scrollbar">
           {TOURNAMENTS.map((t, i) => (
-            <div
+            <Link
               key={i}
-              className="relative min-w-[85vw] sm:min-w-[480px] lg:min-w-[560px] flex-1 overflow-hidden rounded-xl hover-lift"
+              to="/tournament"
+              className="relative block min-w-[85vw] flex-1 overflow-hidden rounded-xl transition-opacity hover:opacity-95 hover-lift sm:min-w-[480px] lg:min-w-[560px]"
             >
               <img
                 src={t.img}
@@ -354,7 +368,7 @@ function Index() {
                 </div>
                 <span className="text-lg font-semibold text-white">{t.name}</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

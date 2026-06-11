@@ -41,15 +41,12 @@ function MatchPage() {
   const [team, setTeam] = useState<"A" | "B">("A");
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background mesh-bg">
-      <BackgroundGlow />
+    <div className="relative w-full overflow-x-clip bg-background mesh-bg">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <BackgroundGlow />
+      </div>
 
       <main className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-        {/* Back */}
-        <button aria-label="Back" className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/70 backdrop-blur text-text-secondary hover:bg-surface hover:text-primary hover:border-primary/40 transition-all">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-        </button>
-
         {/* Match Scorecard */}
         <section className="space-y-6 animate-fade-up">
           <SectionTitle>Match Scorecard</SectionTitle>
@@ -137,12 +134,19 @@ function MatchPage() {
           </div>
         </section>
 
-        {/* Dynamic tab panel — min-height + overflow-anchor keeps page height stable so the browser doesn't reclamp scroll when switching tabs */}
-        <div style={{ overflowAnchor: "none", minHeight: "1600px" }} className="space-y-12">
-          {tab === "Scoreboard" && <Scoreboard team={team} />}
-          {tab === "Ball by ball" && <BallByBall team={team} />}
-          {tab === "Squad" && <Squad />}
-          {tab === "Match info" && <MatchInfo />}
+        <div className="space-y-12">
+          <div className={tab === "Scoreboard" ? "space-y-12" : "hidden"}>
+            <Scoreboard team={team} />
+          </div>
+          <div className={tab === "Ball by ball" ? "space-y-12" : "hidden"}>
+            <BallByBall team={team} />
+          </div>
+          <div className={tab === "Squad" ? undefined : "hidden"}>
+            <Squad />
+          </div>
+          <div className={tab === "Match info" ? undefined : "hidden"}>
+            <MatchInfo />
+          </div>
         </div>
 
 

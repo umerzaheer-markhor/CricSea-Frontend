@@ -19,6 +19,9 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as CreateTournamentRouteRouteImport } from './routes/create-tournament/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CreateTournamentIndexRouteImport } from './routes/create-tournament/index'
+import { Route as CreateTournamentTournamentIdTeamsRouteImport } from './routes/create-tournament/$tournamentId/teams'
+import { Route as CreateTournamentTournamentIdOfficialsRouteImport } from './routes/create-tournament/$tournamentId/officials'
+import { Route as CreateTournamentTournamentIdGroundsRouteImport } from './routes/create-tournament/$tournamentId/grounds'
 import { Route as CreateTournamentTournamentIdCreatedRouteImport } from './routes/create-tournament/$tournamentId/created'
 import { Route as CreateTournamentTournamentIdCreateDrawRouteImport } from './routes/create-tournament/$tournamentId/create-draw'
 
@@ -72,6 +75,24 @@ const CreateTournamentIndexRoute = CreateTournamentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => CreateTournamentRouteRoute,
 } as any)
+const CreateTournamentTournamentIdTeamsRoute =
+  CreateTournamentTournamentIdTeamsRouteImport.update({
+    id: '/$tournamentId/teams',
+    path: '/$tournamentId/teams',
+    getParentRoute: () => CreateTournamentRouteRoute,
+  } as any)
+const CreateTournamentTournamentIdOfficialsRoute =
+  CreateTournamentTournamentIdOfficialsRouteImport.update({
+    id: '/$tournamentId/officials',
+    path: '/$tournamentId/officials',
+    getParentRoute: () => CreateTournamentRouteRoute,
+  } as any)
+const CreateTournamentTournamentIdGroundsRoute =
+  CreateTournamentTournamentIdGroundsRouteImport.update({
+    id: '/$tournamentId/grounds',
+    path: '/$tournamentId/grounds',
+    getParentRoute: () => CreateTournamentRouteRoute,
+  } as any)
 const CreateTournamentTournamentIdCreatedRoute =
   CreateTournamentTournamentIdCreatedRouteImport.update({
     id: '/$tournamentId/created',
@@ -98,6 +119,9 @@ export interface FileRoutesByFullPath {
   '/create-tournament/': typeof CreateTournamentIndexRoute
   '/create-tournament/$tournamentId/create-draw': typeof CreateTournamentTournamentIdCreateDrawRoute
   '/create-tournament/$tournamentId/created': typeof CreateTournamentTournamentIdCreatedRoute
+  '/create-tournament/$tournamentId/grounds': typeof CreateTournamentTournamentIdGroundsRoute
+  '/create-tournament/$tournamentId/officials': typeof CreateTournamentTournamentIdOfficialsRoute
+  '/create-tournament/$tournamentId/teams': typeof CreateTournamentTournamentIdTeamsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -111,6 +135,9 @@ export interface FileRoutesByTo {
   '/create-tournament': typeof CreateTournamentIndexRoute
   '/create-tournament/$tournamentId/create-draw': typeof CreateTournamentTournamentIdCreateDrawRoute
   '/create-tournament/$tournamentId/created': typeof CreateTournamentTournamentIdCreatedRoute
+  '/create-tournament/$tournamentId/grounds': typeof CreateTournamentTournamentIdGroundsRoute
+  '/create-tournament/$tournamentId/officials': typeof CreateTournamentTournamentIdOfficialsRoute
+  '/create-tournament/$tournamentId/teams': typeof CreateTournamentTournamentIdTeamsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -126,6 +153,9 @@ export interface FileRoutesById {
   '/create-tournament/': typeof CreateTournamentIndexRoute
   '/create-tournament/$tournamentId/create-draw': typeof CreateTournamentTournamentIdCreateDrawRoute
   '/create-tournament/$tournamentId/created': typeof CreateTournamentTournamentIdCreatedRoute
+  '/create-tournament/$tournamentId/grounds': typeof CreateTournamentTournamentIdGroundsRoute
+  '/create-tournament/$tournamentId/officials': typeof CreateTournamentTournamentIdOfficialsRoute
+  '/create-tournament/$tournamentId/teams': typeof CreateTournamentTournamentIdTeamsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -142,6 +172,9 @@ export interface FileRouteTypes {
     | '/create-tournament/'
     | '/create-tournament/$tournamentId/create-draw'
     | '/create-tournament/$tournamentId/created'
+    | '/create-tournament/$tournamentId/grounds'
+    | '/create-tournament/$tournamentId/officials'
+    | '/create-tournament/$tournamentId/teams'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +188,9 @@ export interface FileRouteTypes {
     | '/create-tournament'
     | '/create-tournament/$tournamentId/create-draw'
     | '/create-tournament/$tournamentId/created'
+    | '/create-tournament/$tournamentId/grounds'
+    | '/create-tournament/$tournamentId/officials'
+    | '/create-tournament/$tournamentId/teams'
   id:
     | '__root__'
     | '/'
@@ -169,6 +205,9 @@ export interface FileRouteTypes {
     | '/create-tournament/'
     | '/create-tournament/$tournamentId/create-draw'
     | '/create-tournament/$tournamentId/created'
+    | '/create-tournament/$tournamentId/grounds'
+    | '/create-tournament/$tournamentId/officials'
+    | '/create-tournament/$tournamentId/teams'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -255,6 +294,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreateTournamentIndexRouteImport
       parentRoute: typeof CreateTournamentRouteRoute
     }
+    '/create-tournament/$tournamentId/teams': {
+      id: '/create-tournament/$tournamentId/teams'
+      path: '/$tournamentId/teams'
+      fullPath: '/create-tournament/$tournamentId/teams'
+      preLoaderRoute: typeof CreateTournamentTournamentIdTeamsRouteImport
+      parentRoute: typeof CreateTournamentRouteRoute
+    }
+    '/create-tournament/$tournamentId/officials': {
+      id: '/create-tournament/$tournamentId/officials'
+      path: '/$tournamentId/officials'
+      fullPath: '/create-tournament/$tournamentId/officials'
+      preLoaderRoute: typeof CreateTournamentTournamentIdOfficialsRouteImport
+      parentRoute: typeof CreateTournamentRouteRoute
+    }
+    '/create-tournament/$tournamentId/grounds': {
+      id: '/create-tournament/$tournamentId/grounds'
+      path: '/$tournamentId/grounds'
+      fullPath: '/create-tournament/$tournamentId/grounds'
+      preLoaderRoute: typeof CreateTournamentTournamentIdGroundsRouteImport
+      parentRoute: typeof CreateTournamentRouteRoute
+    }
     '/create-tournament/$tournamentId/created': {
       id: '/create-tournament/$tournamentId/created'
       path: '/$tournamentId/created'
@@ -276,6 +336,9 @@ interface CreateTournamentRouteRouteChildren {
   CreateTournamentIndexRoute: typeof CreateTournamentIndexRoute
   CreateTournamentTournamentIdCreateDrawRoute: typeof CreateTournamentTournamentIdCreateDrawRoute
   CreateTournamentTournamentIdCreatedRoute: typeof CreateTournamentTournamentIdCreatedRoute
+  CreateTournamentTournamentIdGroundsRoute: typeof CreateTournamentTournamentIdGroundsRoute
+  CreateTournamentTournamentIdOfficialsRoute: typeof CreateTournamentTournamentIdOfficialsRoute
+  CreateTournamentTournamentIdTeamsRoute: typeof CreateTournamentTournamentIdTeamsRoute
 }
 
 const CreateTournamentRouteRouteChildren: CreateTournamentRouteRouteChildren = {
@@ -284,6 +347,12 @@ const CreateTournamentRouteRouteChildren: CreateTournamentRouteRouteChildren = {
     CreateTournamentTournamentIdCreateDrawRoute,
   CreateTournamentTournamentIdCreatedRoute:
     CreateTournamentTournamentIdCreatedRoute,
+  CreateTournamentTournamentIdGroundsRoute:
+    CreateTournamentTournamentIdGroundsRoute,
+  CreateTournamentTournamentIdOfficialsRoute:
+    CreateTournamentTournamentIdOfficialsRoute,
+  CreateTournamentTournamentIdTeamsRoute:
+    CreateTournamentTournamentIdTeamsRoute,
 }
 
 const CreateTournamentRouteRouteWithChildren =

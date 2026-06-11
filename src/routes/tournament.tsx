@@ -19,14 +19,12 @@ const COLS = ["M", "W", "L", "D", "P", "NR"];
 
 function TournamentPage() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background mesh-bg">
-      <BackgroundGlow />
+    <div className="relative w-full overflow-x-clip bg-background mesh-bg">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <BackgroundGlow />
+      </div>
 
       <main className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
-        <button aria-label="Back" className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/70 backdrop-blur text-text-secondary hover:bg-surface hover:text-primary hover:border-primary/40 transition-all">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-        </button>
-
         {/* Hero: banner + title overlay + floating crest */}
         <section className="relative animate-fade-up">
           <div className="relative overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-lg)] group">

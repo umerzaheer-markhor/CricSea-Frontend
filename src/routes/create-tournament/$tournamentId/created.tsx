@@ -1,7 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  ArrowLeft,
   ClipboardList,
   GitBranch,
   MapPin,
@@ -9,6 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { TournamentPageShell } from "@/components/tournament/PageShell";
 import { getTournament, type Tournament } from "@/lib/tournament-store";
 import { cn } from "@/lib/utils";
 import fireball from "@/assets/fireball.png";
@@ -34,19 +34,19 @@ const SETUP_STEPS = [
     id: "teams",
     label: "Add & manage team",
     icon: Users,
-    to: null,
+    to: "/create-tournament/$tournamentId/teams" as const,
   },
   {
     id: "officials",
     label: "Add & manage officials",
     icon: UserCog,
-    to: null,
+    to: "/create-tournament/$tournamentId/officials" as const,
   },
   {
     id: "grounds",
     label: "Add & manage grounds",
     icon: MapPin,
-    to: null,
+    to: "/create-tournament/$tournamentId/grounds" as const,
   },
   {
     id: "fixtures",
@@ -80,17 +80,8 @@ function TournamentCreatedPage() {
   if (!tournament) return null;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background flex flex-col">
+    <TournamentPageShell fillViewport>
       <main className="relative mx-auto w-full max-w-5xl flex-1 px-6 sm:px-10 lg:px-16 py-8 sm:py-10">
-        <button
-          type="button"
-          onClick={() => navigate({ to: "/create-tournament" })}
-          aria-label="Go back"
-          className="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-secondary text-text-secondary transition-colors hover:text-primary hover:border-primary/40"
-        >
-          <ArrowLeft className="h-4 w-4" />
-        </button>
-
         <section className="animate-fade-up">
           <div className="flex items-center gap-3">
             <img src={fireball} alt="" className="h-8 w-auto shrink-0" />
@@ -148,6 +139,6 @@ function TournamentCreatedPage() {
       </main>
 
       <Footer />
-    </div>
+    </TournamentPageShell>
   );
 }

@@ -1,6 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
@@ -21,8 +27,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 isolate">
-      <div aria-hidden className="pointer-events-none absolute inset-0 glass-nav-blur" />
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/75 shadow-sm backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/65">
       <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
         <div className="flex min-w-0 items-center gap-6 lg:gap-10">
           <Link to="/" className="hover-scale inline-block shrink-0">
@@ -66,15 +71,31 @@ export function Navbar() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle className="hidden sm:inline-flex" />
-          <button
-            type="button"
+          <Link
+            to="/create-tournament"
             className="hidden sm:inline-flex rounded-md px-3 lg:px-4 py-2 text-xs lg:text-sm font-semibold text-primary-foreground btn-cta"
           >
-            Control Match
-          </button>
-          <div className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground glow-primary">
-            DM
-          </div>
+            Create Tournament
+          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                aria-label="Account menu"
+                className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground glow-primary outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              >
+                DM
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-[10rem]">
+              <DropdownMenuItem className="cursor-pointer font-medium">Profile</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/signin" className="cursor-pointer font-medium">
+                  Login
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <ThemeToggle className="sm:hidden" />
           <button
@@ -109,7 +130,7 @@ export function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="relative md:hidden border-t border-[var(--glass-border)]">
+        <div className="relative md:hidden border-t border-border/50 bg-background/60 backdrop-blur-xl">
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
             <ul className="flex flex-col gap-3 text-sm font-semibold">
               {NAV_ITEMS.map((item) => {
@@ -144,13 +165,30 @@ export function Navbar() {
                   </li>
                 );
               })}
-              <li className="pt-2 border-t border-border">
+              <li className="pt-2 border-t border-border flex flex-col gap-2">
                 <button
                   type="button"
-                  className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground btn-cta"
+                  className="block w-full rounded-md px-2 py-1.5 text-left text-sm font-semibold text-text-primary transition-colors hover:bg-surface hover:text-primary"
+                  onClick={() => setMenuOpen(false)}
                 >
-                  Control Match
+                  Profile
                 </button>
+                <Link
+                  to="/signin"
+                  className="block w-full rounded-md px-2 py-1.5 text-sm font-semibold text-text-primary transition-colors hover:bg-surface hover:text-primary"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="pt-2 border-t border-border">
+                <Link
+                  to="/create-tournament"
+                  className="block w-full rounded-md bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground btn-cta"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Create Tournament
+                </Link>
               </li>
             </ul>
           </div>

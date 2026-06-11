@@ -334,9 +334,9 @@
 }
 
 @utility glass-nav-blur {
-  background: var(--glass-bg);
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  background: color-mix(in srgb, var(--background) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--glass-border);
   box-shadow:
     0 4px 24px rgba(15, 23, 42, 0.12),
@@ -364,6 +364,44 @@
   box-shadow: var(--shadow-glow);
   transition: box-shadow 220ms ease, transform 220ms ease, filter 220ms ease;
   &:hover {
+    box-shadow: var(--shadow-glow-hover);
+  }
+}
+
+@utility team-card-glow {
+  position: relative;
+  isolation: isolate;
+  border-color: color-mix(in oklab, var(--primary) 32%, var(--border));
+  box-shadow: var(--shadow-glow);
+  transition:
+    box-shadow 320ms ease,
+    border-color 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 85% 70% at 0% 0%, color-mix(in oklab, var(--primary) 22%, transparent) 0%, transparent 58%),
+      radial-gradient(ellipse 75% 60% at 100% 100%, color-mix(in oklab, var(--primary) 16%, transparent) 0%, transparent 52%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 18%, transparent);
+  }
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--primary) 48%, var(--border));
     box-shadow: var(--shadow-glow-hover);
   }
 }
@@ -525,8 +563,36 @@
   50% { box-shadow: 0 0 0 12px color-mix(in oklab, var(--primary) 0%, transparent); }
 }
 @keyframes greenGlowPulse {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0; }
+  0%, 100% { opacity: 0.34; transform: scale(1); }
+  50% { opacity: 0.1; transform: scale(1.06); }
+}
+@keyframes cardGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--primary) 58%, transparent),
+      0 8px 28px color-mix(in oklab, var(--primary) 30%, transparent),
+      0 0 44px color-mix(in oklab, var(--primary) 16%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--primary) 92%, transparent),
+      0 12px 44px color-mix(in oklab, var(--primary) 52%, transparent),
+      0 0 72px color-mix(in oklab, var(--primary) 32%, transparent);
+  }
+}
+@keyframes dialogHaloPulse {
+  0%, 100% {
+    opacity: 0.5;
+    box-shadow:
+      0 0 16px color-mix(in oklab, var(--primary) 32%, transparent),
+      0 0 40px color-mix(in oklab, var(--primary) 14%, transparent);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 28px color-mix(in oklab, var(--primary) 58%, transparent),
+      0 0 64px color-mix(in oklab, var(--primary) 28%, transparent);
+  }
 }
 @keyframes shimmer {
   0% { background-position: -200% 0; }
@@ -554,6 +620,57 @@
 @utility animate-green-glow-alt {
   animation: greenGlowPulse 7s ease-in-out infinite;
   animation-delay: 3.5s;
+}
+@utility card-selected-glow {
+  animation: cardGlowPulse 2.8s ease-in-out infinite;
+}
+@keyframes dialogGlowBorderPulse {
+  0%, 100% {
+    background: color-mix(in oklab, var(--primary) 52%, transparent);
+    box-shadow:
+      0 0 14px color-mix(in oklab, var(--primary) 30%, transparent),
+      0 0 36px color-mix(in oklab, var(--primary) 14%, transparent);
+  }
+  50% {
+    background: color-mix(in oklab, var(--primary) 86%, transparent);
+    box-shadow:
+      0 0 24px color-mix(in oklab, var(--primary) 52%, transparent),
+      0 0 64px color-mix(in oklab, var(--primary) 28%, transparent);
+  }
+}
+
+@utility dialog-glow-pulse {
+  position: relative;
+  width: 100%;
+  padding: 1px;
+  border-radius: 1rem;
+  overflow: visible;
+  animation: dialogGlowBorderPulse 2.8s ease-in-out infinite;
+}
+
+@utility dialog-glow-surface {
+  border-radius: calc(1rem - 1px);
+  background: var(--background);
+}
+
+@utility dialog-glow-scroll {
+  scrollbar-gutter: stable;
+  border-radius: calc(1rem - 1px);
+}
+@utility picker-card-glow {
+  position: relative;
+  isolation: isolate;
+  border-color: color-mix(in oklab, var(--primary) 28%, var(--border));
+  box-shadow: var(--shadow-glow);
+  transition:
+    box-shadow 320ms ease,
+    border-color 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--primary) 45%, var(--border));
+    box-shadow: var(--shadow-glow-hover);
+  }
 }
 @utility animate-shimmer {
   background: linear-gradient(90deg,

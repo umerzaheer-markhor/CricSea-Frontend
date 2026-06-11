@@ -1,8 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ImagePlus } from "lucide-react";
 import { useRef, useState } from "react";
-import { Footer } from "@/components/Footer";
-import { DatePickerField, FormField } from "@/components/tournament/FormFields";
+import {
+  DatePickerField,
+  FormField,
+  tournamentFieldClassName,
+} from "@/components/tournament/FormFields";
 import { TournamentPageShell } from "@/components/tournament/PageShell";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -76,7 +79,7 @@ function CreateTournamentPage() {
 
   return (
     <TournamentPageShell>
-      <main className="relative mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 space-y-8">
+      <main className="relative mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8">
         <section className="relative animate-fade-up">
           <div className="relative">
             <button
@@ -135,13 +138,13 @@ function CreateTournamentPage() {
             <h1 className="font-display text-xl sm:text-2xl font-bold text-text-primary">Create Tournament</h1>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 gap-5 overflow-visible sm:grid-cols-2 md:gap-x-6">
             <FormField label="Tournament name">
               <Input
                 value={tournamentName}
                 onChange={(e) => setTournamentName(e.target.value)}
                 placeholder="Enter tournament name"
-                className="h-11 rounded-xl border-border bg-surface-secondary text-text-primary placeholder:text-text-muted focus-visible:ring-primary/40"
+                className={tournamentFieldClassName}
               />
             </FormField>
             <FormField label="Short name">
@@ -149,7 +152,7 @@ function CreateTournamentPage() {
                 value={shortName}
                 onChange={(e) => setShortName(e.target.value)}
                 placeholder="Enter short name"
-                className="h-11 rounded-xl border-border bg-surface-secondary text-text-primary placeholder:text-text-muted focus-visible:ring-primary/40"
+                className={tournamentFieldClassName}
               />
             </FormField>
             <FormField label="Start Date">
@@ -218,8 +221,6 @@ function CreateTournamentPage() {
           </button>
         </section>
       </main>
-
-      <Footer />
     </TournamentPageShell>
   );
 }

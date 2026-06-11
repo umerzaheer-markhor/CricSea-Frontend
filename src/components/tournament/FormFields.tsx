@@ -6,9 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
+export const tournamentFieldClassName =
+  "h-11 w-full rounded-xl border border-border bg-surface-secondary text-text-primary shadow-none placeholder:text-text-muted focus-visible:outline-none focus-visible:border-primary/70 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/35";
+
 export function FormField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="space-y-2">
+    <div className="min-w-0 space-y-2 overflow-visible">
       <Label className="text-sm font-semibold text-text-primary">{label}</Label>
       {children}
     </div>
@@ -32,14 +35,19 @@ export function DatePickerField({
         <button
           type="button"
           className={cn(
-            "flex h-11 w-full items-center justify-between rounded-xl border border-border bg-surface-secondary px-3 text-sm transition-colors hover:border-primary/30 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40",
-            !date && "text-text-muted",
+            tournamentFieldClassName,
+            "flex w-full min-w-0 items-center justify-between gap-2 px-3 text-left transition-colors hover:border-primary/30",
           )}
         >
-          <span className={date ? "text-text-primary font-medium" : "text-text-muted"}>
+          <span
+            className={cn(
+              "min-w-0 flex-1 truncate",
+              date ? "font-medium text-text-primary" : "text-text-muted",
+            )}
+          >
             {date ? format(date, "d MMMM, yyyy") : placeholder}
           </span>
-          <CalendarIcon className="h-4 w-4 text-text-secondary shrink-0" />
+          <CalendarIcon className="h-4 w-4 shrink-0 text-text-secondary" />
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
