@@ -11,9 +11,9 @@ export const tournamentFieldClassName =
 
 export function FormField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="min-w-0 space-y-2 overflow-visible">
-      <Label className="text-sm font-semibold text-text-primary">{label}</Label>
-      {children}
+    <div className="flex min-w-0 flex-col gap-3">
+      <Label className="text-sm font-semibold leading-normal text-text-primary">{label}</Label>
+      <div className="w-full">{children}</div>
     </div>
   );
 }

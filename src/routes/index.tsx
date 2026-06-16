@@ -579,21 +579,28 @@ function Index() {
       </section>
 
       {/* CricSea Built for Players */}
-      <section className="relative overflow-hidden bg-secondary">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url(${texture})`, backgroundSize: "cover" }} />
+      <section className="relative overflow-hidden bg-secondary dark:bg-background">
+        <div
+          className="absolute inset-0 opacity-20 dark:opacity-[0.06]"
+          style={{ backgroundImage: `url(${texture})`, backgroundSize: "cover" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 dark:bg-gradient-to-br dark:from-primary/8 dark:via-transparent dark:to-transparent"
+        />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:grid-cols-2">
           <div>
             <div className="flex items-start gap-3">
               <img src={fireball} alt="" className="mt-1 h-6 w-auto" />
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-2xl font-bold text-white dark:text-text-primary">
                 CricSea  Built for Players,{" "}
                 <span className="text-primary">Fans &amp; Officials</span>
               </h3>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-text-muted">
+            <p className="mt-4 text-sm leading-relaxed text-text-muted dark:text-text-secondary">
               As players and fans of the world's greatest game, we know cricket is more than just a sport—it's the passion that drives us every day. With CricSea, you get real-time match insights, including live scores, batting performance, and bowling stats, all accessible anytime through your personal player dashboard.
             </p>
-            <ul className="mt-5 list-disc space-y-1.5 pl-5 text-sm text-text-muted marker:text-text-secondary">
+            <ul className="mt-5 list-disc space-y-1.5 pl-5 text-sm text-text-muted marker:text-text-secondary dark:text-text-secondary dark:marker:text-text-muted">
               {PLAYER_BULLETS.map((b) => (
                 <li key={b}>{b}</li>
               ))}

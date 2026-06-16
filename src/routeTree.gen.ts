@@ -10,15 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyOtpRouteImport } from './routes/verify-otp'
+import { Route as TournamentStatsRouteImport } from './routes/tournament-stats'
 import { Route as TournamentRouteImport } from './routes/tournament'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as SelectTeamsForMatchRouteImport } from './routes/select-teams-for-match'
 import { Route as MatchRouteImport } from './routes/match'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as CreateTournamentRouteRouteImport } from './routes/create-tournament/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as CreateTournamentIndexRouteImport } from './routes/create-tournament/index'
+import { Route as DashboardTournamentsRouteImport } from './routes/dashboard/tournaments'
+import { Route as DashboardManageCricketRouteImport } from './routes/dashboard/manage-cricket'
+import { Route as DashboardCreateClubRouteImport } from './routes/dashboard/create-club'
+import { Route as DashboardContactUsRouteImport } from './routes/dashboard/contact-us'
 import { Route as CreateTournamentTournamentIdTeamsRouteImport } from './routes/create-tournament/$tournamentId/teams'
 import { Route as CreateTournamentTournamentIdOfficialsRouteImport } from './routes/create-tournament/$tournamentId/officials'
 import { Route as CreateTournamentTournamentIdGroundsRouteImport } from './routes/create-tournament/$tournamentId/grounds'
@@ -28,6 +35,11 @@ import { Route as CreateTournamentTournamentIdCreateDrawRouteImport } from './ro
 const VerifyOtpRoute = VerifyOtpRouteImport.update({
   id: '/verify-otp',
   path: '/verify-otp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TournamentStatsRoute = TournamentStatsRouteImport.update({
+  id: '/tournament-stats',
+  path: '/tournament-stats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TournamentRoute = TournamentRouteImport.update({
@@ -60,6 +72,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRouteRoute = DashboardRouteRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CreateTournamentRouteRoute = CreateTournamentRouteRouteImport.update({
   id: '/create-tournament',
   path: '/create-tournament',
@@ -70,10 +87,35 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
 const CreateTournamentIndexRoute = CreateTournamentIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => CreateTournamentRouteRoute,
+} as any)
+const DashboardTournamentsRoute = DashboardTournamentsRouteImport.update({
+  id: '/tournaments',
+  path: '/tournaments',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardManageCricketRoute = DashboardManageCricketRouteImport.update({
+  id: '/manage-cricket',
+  path: '/manage-cricket',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardCreateClubRoute = DashboardCreateClubRouteImport.update({
+  id: '/create-club',
+  path: '/create-club',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardContactUsRoute = DashboardContactUsRouteImport.update({
+  id: '/contact-us',
+  path: '/contact-us',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 const CreateTournamentTournamentIdTeamsRoute =
   CreateTournamentTournamentIdTeamsRouteImport.update({
@@ -109,14 +151,21 @@ const CreateTournamentTournamentIdCreateDrawRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/create-tournament': typeof CreateTournamentRouteRouteWithChildren
+  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/match': typeof MatchRoute
   '/select-teams-for-match': typeof SelectTeamsForMatchRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/tournament': typeof TournamentRoute
+  '/tournament-stats': typeof TournamentStatsRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/dashboard/contact-us': typeof DashboardContactUsRoute
+  '/dashboard/create-club': typeof DashboardCreateClubRoute
+  '/dashboard/manage-cricket': typeof DashboardManageCricketRoute
+  '/dashboard/tournaments': typeof DashboardTournamentsRoute
   '/create-tournament/': typeof CreateTournamentIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/create-tournament/$tournamentId/create-draw': typeof CreateTournamentTournamentIdCreateDrawRoute
   '/create-tournament/$tournamentId/created': typeof CreateTournamentTournamentIdCreatedRoute
   '/create-tournament/$tournamentId/grounds': typeof CreateTournamentTournamentIdGroundsRoute
@@ -131,8 +180,14 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/tournament': typeof TournamentRoute
+  '/tournament-stats': typeof TournamentStatsRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/dashboard/contact-us': typeof DashboardContactUsRoute
+  '/dashboard/create-club': typeof DashboardCreateClubRoute
+  '/dashboard/manage-cricket': typeof DashboardManageCricketRoute
+  '/dashboard/tournaments': typeof DashboardTournamentsRoute
   '/create-tournament': typeof CreateTournamentIndexRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/create-tournament/$tournamentId/create-draw': typeof CreateTournamentTournamentIdCreateDrawRoute
   '/create-tournament/$tournamentId/created': typeof CreateTournamentTournamentIdCreatedRoute
   '/create-tournament/$tournamentId/grounds': typeof CreateTournamentTournamentIdGroundsRoute
@@ -143,14 +198,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/create-tournament': typeof CreateTournamentRouteRouteWithChildren
+  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/match': typeof MatchRoute
   '/select-teams-for-match': typeof SelectTeamsForMatchRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/tournament': typeof TournamentRoute
+  '/tournament-stats': typeof TournamentStatsRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/dashboard/contact-us': typeof DashboardContactUsRoute
+  '/dashboard/create-club': typeof DashboardCreateClubRoute
+  '/dashboard/manage-cricket': typeof DashboardManageCricketRoute
+  '/dashboard/tournaments': typeof DashboardTournamentsRoute
   '/create-tournament/': typeof CreateTournamentIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/create-tournament/$tournamentId/create-draw': typeof CreateTournamentTournamentIdCreateDrawRoute
   '/create-tournament/$tournamentId/created': typeof CreateTournamentTournamentIdCreatedRoute
   '/create-tournament/$tournamentId/grounds': typeof CreateTournamentTournamentIdGroundsRoute
@@ -162,14 +224,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/create-tournament'
+    | '/dashboard'
     | '/forgot-password'
     | '/match'
     | '/select-teams-for-match'
     | '/signin'
     | '/signup'
     | '/tournament'
+    | '/tournament-stats'
     | '/verify-otp'
+    | '/dashboard/contact-us'
+    | '/dashboard/create-club'
+    | '/dashboard/manage-cricket'
+    | '/dashboard/tournaments'
     | '/create-tournament/'
+    | '/dashboard/'
     | '/create-tournament/$tournamentId/create-draw'
     | '/create-tournament/$tournamentId/created'
     | '/create-tournament/$tournamentId/grounds'
@@ -184,8 +253,14 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/tournament'
+    | '/tournament-stats'
     | '/verify-otp'
+    | '/dashboard/contact-us'
+    | '/dashboard/create-club'
+    | '/dashboard/manage-cricket'
+    | '/dashboard/tournaments'
     | '/create-tournament'
+    | '/dashboard'
     | '/create-tournament/$tournamentId/create-draw'
     | '/create-tournament/$tournamentId/created'
     | '/create-tournament/$tournamentId/grounds'
@@ -195,14 +270,21 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/create-tournament'
+    | '/dashboard'
     | '/forgot-password'
     | '/match'
     | '/select-teams-for-match'
     | '/signin'
     | '/signup'
     | '/tournament'
+    | '/tournament-stats'
     | '/verify-otp'
+    | '/dashboard/contact-us'
+    | '/dashboard/create-club'
+    | '/dashboard/manage-cricket'
+    | '/dashboard/tournaments'
     | '/create-tournament/'
+    | '/dashboard/'
     | '/create-tournament/$tournamentId/create-draw'
     | '/create-tournament/$tournamentId/created'
     | '/create-tournament/$tournamentId/grounds'
@@ -213,12 +295,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CreateTournamentRouteRoute: typeof CreateTournamentRouteRouteWithChildren
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   MatchRoute: typeof MatchRoute
   SelectTeamsForMatchRoute: typeof SelectTeamsForMatchRoute
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   TournamentRoute: typeof TournamentRoute
+  TournamentStatsRoute: typeof TournamentStatsRoute
   VerifyOtpRoute: typeof VerifyOtpRoute
 }
 
@@ -229,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/verify-otp'
       fullPath: '/verify-otp'
       preLoaderRoute: typeof VerifyOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tournament-stats': {
+      id: '/tournament-stats'
+      path: '/tournament-stats'
+      fullPath: '/tournament-stats'
+      preLoaderRoute: typeof TournamentStatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tournament': {
@@ -273,6 +364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/create-tournament': {
       id: '/create-tournament'
       path: '/create-tournament'
@@ -287,12 +385,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
     '/create-tournament/': {
       id: '/create-tournament/'
       path: '/'
       fullPath: '/create-tournament/'
       preLoaderRoute: typeof CreateTournamentIndexRouteImport
       parentRoute: typeof CreateTournamentRouteRoute
+    }
+    '/dashboard/tournaments': {
+      id: '/dashboard/tournaments'
+      path: '/tournaments'
+      fullPath: '/dashboard/tournaments'
+      preLoaderRoute: typeof DashboardTournamentsRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/manage-cricket': {
+      id: '/dashboard/manage-cricket'
+      path: '/manage-cricket'
+      fullPath: '/dashboard/manage-cricket'
+      preLoaderRoute: typeof DashboardManageCricketRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/create-club': {
+      id: '/dashboard/create-club'
+      path: '/create-club'
+      fullPath: '/dashboard/create-club'
+      preLoaderRoute: typeof DashboardCreateClubRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/contact-us': {
+      id: '/dashboard/contact-us'
+      path: '/contact-us'
+      fullPath: '/dashboard/contact-us'
+      preLoaderRoute: typeof DashboardContactUsRouteImport
+      parentRoute: typeof DashboardRouteRoute
     }
     '/create-tournament/$tournamentId/teams': {
       id: '/create-tournament/$tournamentId/teams'
@@ -360,15 +493,37 @@ const CreateTournamentRouteRouteWithChildren =
     CreateTournamentRouteRouteChildren,
   )
 
+interface DashboardRouteRouteChildren {
+  DashboardContactUsRoute: typeof DashboardContactUsRoute
+  DashboardCreateClubRoute: typeof DashboardCreateClubRoute
+  DashboardManageCricketRoute: typeof DashboardManageCricketRoute
+  DashboardTournamentsRoute: typeof DashboardTournamentsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardContactUsRoute: DashboardContactUsRoute,
+  DashboardCreateClubRoute: DashboardCreateClubRoute,
+  DashboardManageCricketRoute: DashboardManageCricketRoute,
+  DashboardTournamentsRoute: DashboardTournamentsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
+  DashboardRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CreateTournamentRouteRoute: CreateTournamentRouteRouteWithChildren,
+  DashboardRouteRoute: DashboardRouteRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   MatchRoute: MatchRoute,
   SelectTeamsForMatchRoute: SelectTeamsForMatchRoute,
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   TournamentRoute: TournamentRoute,
+  TournamentStatsRoute: TournamentStatsRoute,
   VerifyOtpRoute: VerifyOtpRoute,
 }
 export const routeTree = rootRouteImport

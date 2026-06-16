@@ -72,10 +72,10 @@ export function Navbar() {
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle className="hidden sm:inline-flex" />
           <Link
-            to="/create-tournament"
+            to="/dashboard"
             className="hidden sm:inline-flex rounded-md px-3 lg:px-4 py-2 text-xs lg:text-sm font-semibold text-primary-foreground btn-cta"
           >
-            Create Tournament
+            Dashboard
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -88,7 +88,11 @@ export function Navbar() {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-[10rem]">
-              <DropdownMenuItem className="cursor-pointer font-medium">Profile</DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer font-medium" asChild>
+                <Link to="/dashboard" className="cursor-pointer font-medium">
+                  Profile
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/signin" className="cursor-pointer font-medium">
                   Login
@@ -166,13 +170,13 @@ export function Navbar() {
                 );
               })}
               <li className="pt-2 border-t border-border flex flex-col gap-2">
-                <button
-                  type="button"
+                <Link
+                  to="/dashboard"
                   className="block w-full rounded-md px-2 py-1.5 text-left text-sm font-semibold text-text-primary transition-colors hover:bg-surface hover:text-primary"
                   onClick={() => setMenuOpen(false)}
                 >
                   Profile
-                </button>
+                </Link>
                 <Link
                   to="/signin"
                   className="block w-full rounded-md px-2 py-1.5 text-sm font-semibold text-text-primary transition-colors hover:bg-surface hover:text-primary"
@@ -183,11 +187,11 @@ export function Navbar() {
               </li>
               <li className="pt-2 border-t border-border">
                 <Link
-                  to="/create-tournament"
+                  to="/dashboard"
                   className="block w-full rounded-md bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground btn-cta"
                   onClick={() => setMenuOpen(false)}
                 >
-                  Create Tournament
+                  Dashboard
                 </Link>
               </li>
             </ul>

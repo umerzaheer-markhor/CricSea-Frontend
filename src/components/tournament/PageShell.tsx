@@ -12,12 +12,12 @@ export function TournamentPageShell({
   return (
     <div
       className={cn(
-        "relative w-full overflow-x-clip bg-background mesh-bg",
-        fillViewport && "flex min-h-full flex-1 flex-col",
+        "relative flex w-full flex-1 flex-col overflow-x-clip bg-background mesh-bg min-h-0",
+        fillViewport && "min-h-full",
       )}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <BackgroundGlow />
+        <BackgroundGlow bottomGlow={false} />
       </div>
       <div className={cn("relative", fillViewport && "flex flex-1 flex-col")}>{children}</div>
     </div>
